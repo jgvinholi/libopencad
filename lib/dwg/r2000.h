@@ -31,7 +31,7 @@
 #ifndef DWG_R2000_H_H
 #define DWG_R2000_H_H
 
-#include "cadfile.h"
+#include "../cadfile.h"
 
 struct SectionLocatorRecord
 {

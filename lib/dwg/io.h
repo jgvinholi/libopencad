@@ -31,8 +31,8 @@
 #ifndef DWG_IO_H
 #define DWG_IO_H
 
-#include "cadheader.h"
-#include "cadobjects.h"
+#include "../cadheader.h"
+#include "../cadobjects.h"
 
 #include <string>
 #include <algorithm>

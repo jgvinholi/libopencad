@@ -28,7 +28,7 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *  SOFTWARE.
  *******************************************************************************/
-#include <dwg/io.h>
+#include "dwg/io.h"
 #include "cadheader.h"
 #include "opencad_api.h"
 
@@ -473,8 +473,8 @@ int CADHeader::addValue( short code, long julianday, long milliseconds )
     // julian -> unix        return (julian - 2440587.5) * 86400.0
 
     double seconds     = double( milliseconds ) / 1000;
-    double unix        = ( double( julianday ) - 2440587.5 ) * 86400.0;
-    time_t fullSeconds = static_cast<time_t>(unix + seconds);
+    double cad_unix        = ( double( julianday ) - 2440587.5 ) * 86400.0;
+    time_t fullSeconds = static_cast<time_t>(cad_unix + seconds);
     return addValue( code, CADVariant( fullSeconds ) );
 }
 
