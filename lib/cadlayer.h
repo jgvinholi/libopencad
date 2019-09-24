@@ -108,7 +108,7 @@ protected:
     vector<pair<long, long> >               geometryHandles; // second param is CADInsert handle, 0 if it's not a geometry in block ref.
     vector<long>                            imageHandles;
     vector<pair<long, map<string, long> > > geometryAttributes;
-    map<long, Matrix>                       transformations;
+    map<long, Matrix_CAD>                       transformations;
 
     CADFile * pCADFile;
 };

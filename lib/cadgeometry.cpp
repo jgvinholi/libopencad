@@ -41,7 +41,7 @@ using namespace std;
 // CADGeometry
 //------------------------------------------------------------------------------
 
-Matrix::Matrix()
+Matrix_CAD::Matrix_CAD()
 {
     matrix[0] = 1.0;
     matrix[1] = 0.0;
@@ -54,7 +54,7 @@ Matrix::Matrix()
     matrix[8] = 1.0;
 }
 
-void Matrix::translate( const CADVector& vector )
+void Matrix_CAD::translate( const CADVector& vector )
 {
     double a00 = matrix[0], a01 = matrix[1], a02 = matrix[2], a10 = matrix[3], a11 = matrix[4], a12 = matrix[5], a20 = matrix[6], a21 = matrix[7], a22 = matrix[8];
 
@@ -63,7 +63,7 @@ void Matrix::translate( const CADVector& vector )
     matrix[8] = vector.getX() * a02 + vector.getY() * a12 + a22;
 }
 
-void Matrix::rotate( double rotation )
+void Matrix_CAD::rotate( double rotation )
 {
     double              s                                                                                        = sin( rotation ), c = cos(
             rotation ), a00                                                                                      = matrix[0], a01 = matrix[1], a02 = matrix[2], a10 = matrix[3], a11 = matrix[4], a12 = matrix[5];
@@ -77,7 +77,7 @@ void Matrix::rotate( double rotation )
     matrix[5] = c * a12 - s * a02;
 }
 
-void Matrix::scale( const CADVector& vector )
+void Matrix_CAD::scale( const CADVector& vector )
 {
     matrix[0] *= vector.getX();
     matrix[1] *= vector.getX();
@@ -87,7 +87,7 @@ void Matrix::scale( const CADVector& vector )
     matrix[5] *= vector.getY();
 }
 
-CADVector Matrix::multiply( const CADVector& vector ) const
+CADVector Matrix_CAD::multiply( const CADVector& vector ) const
 {
     CADVector out;
     out.setX( vector.getX() * matrix[0] + vector.getY() * matrix[1] + vector.getZ() * matrix[2] );
@@ -162,7 +162,7 @@ CADUnknown::CADUnknown()
 {
 }
 
-void CADUnknown::transform( const Matrix& /*matrix*/)
+void CADUnknown::transform( const Matrix_CAD& /*matrix*/)
 {
 }
 
@@ -223,7 +223,7 @@ void CADPoint3D::print() const
     "\t" << position.getZ() << "\n" << endl;
 }
 
-void CADPoint3D::transform( const Matrix& matrix )
+void CADPoint3D::transform( const Matrix_CAD& matrix )
 {
     position = matrix.multiply( position );
 }
@@ -271,7 +271,7 @@ void CADLine::print() const
     end.getPosition().getX() << "\t" << end.getPosition().getY() << "\t" << end.getPosition().getZ() << "\n" << endl;
 }
 
-void CADLine::transform( const Matrix& matrix )
+void CADLine::transform( const Matrix_CAD& matrix )
 {
     start.transform( matrix );
     end.transform( matrix );
@@ -393,7 +393,7 @@ void CADPolyline3D::print() const
     cout << endl;
 }
 
-void CADPolyline3D::transform( const Matrix& matrix )
+void CADPolyline3D::transform( const Matrix_CAD& matrix )
 {
     for( CADVector& vertex : vertexes )
     {
@@ -514,7 +514,7 @@ void CADLWPolyline::setBulges( const vector<double>& value )
 	}
 }
 
-void CADLWPolyline::transform( const Matrix& matrix )
+void CADLWPolyline::transform( const Matrix_CAD& matrix )
 {
 	for (CADVector& vertex : vertexes)
 	{
@@ -649,7 +649,7 @@ void CADPolyline2D::print() const
 	cout << endl;
 }
 
-void CADPolyline2D::transform( const Matrix& matrix )
+void CADPolyline2D::transform( const Matrix_CAD& matrix )
 {
 	for (CADVector& vertex : vertexes)
 	{
@@ -815,7 +815,7 @@ void CADSpline::print() const
     cout << endl;
 }
 
-void CADSpline::transform( const Matrix& matrix )
+void CADSpline::transform( const Matrix_CAD& matrix )
 {
     for( CADVector& pt : avertCtrlPoints )
         pt = matrix.multiply( pt );
@@ -933,7 +933,7 @@ void CADSolid::print() const
     cout << endl;
 }
 
-void CADSolid::transform( const Matrix& matrix )
+void CADSolid::transform( const Matrix_CAD& matrix )
 {
     CADPoint3D::transform( matrix );
     for( CADVector& corner : avertCorners )
@@ -1061,7 +1061,7 @@ void CADImage::print() const
     cout << endl;
 }
 
-void CADImage::transform( const Matrix& matrix )
+void CADImage::transform( const Matrix_CAD& matrix )
 {
     vertInsertionPoint = matrix.multiply( vertInsertionPoint );
     for( CADVector& pt : avertClippingPolygon )
@@ -1148,7 +1148,7 @@ void CADFace3D::print() const
     cout << endl;
 }
 
-void CADFace3D::transform( const Matrix& matrix )
+void CADFace3D::transform( const Matrix_CAD& matrix )
 {
     for( CADVector& corner : avertCorners )
     {
@@ -1186,7 +1186,7 @@ void CADPolylinePFace::print() const
     cout << endl;
 }
 
-void CADPolylinePFace::transform( const Matrix& matrix )
+void CADPolylinePFace::transform( const Matrix_CAD& matrix )
 {
     for( CADVector& vertex : vertexes )
         vertex = matrix.multiply( vertex );
@@ -1234,7 +1234,7 @@ void CADMLine::print() const
     cout << endl;
 }
 
-void CADMLine::transform( const Matrix& matrix )
+void CADMLine::transform( const Matrix_CAD& matrix )
 {
     CADPoint3D::transform( matrix );
     for( CADVector& vertex : avertVertexes )
@@ -1283,7 +1283,7 @@ void CADAttrib::print() const
     position.getZ() << "\n" << "Tag: " << sTag << "\n" << "Text: " << textValue << "\n" << endl;
 }
 
-void CADAttrib::transform( const Matrix& matrix )
+void CADAttrib::transform( const Matrix_CAD& matrix )
 {
     CADText::transform( matrix );
     vertAlignmentPoint = matrix.multiply( vertAlignmentPoint );

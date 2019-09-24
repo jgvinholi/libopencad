@@ -43,12 +43,12 @@ class CADAttdef;
 class CADAttrib;
 
 /**
- * @brief The Matrix class
+ * @brief The Matrix_CAD class
  */
-class Matrix
+class Matrix_CAD
 {
 public:
-              Matrix();
+              Matrix_CAD();
     void      translate( const CADVector& vector );
     void      rotate( double rotation );
     void      scale( const CADVector& vector );
@@ -107,7 +107,7 @@ public:
     void           setEED( vector<string> eed );
 
     virtual void print() const                     = 0;
-    virtual void transform( const Matrix& matrix ) = 0;
+    virtual void transform( const Matrix_CAD& matrix ) = 0;
 protected:
     vector<CADAttrib> blockAttributes; // attributes of block reference this geometry is attached to.
 
@@ -126,7 +126,7 @@ public:
     CADUnknown();
 
     virtual void print() const override;
-    void         transform( const Matrix& matrix ) override;
+    void         transform( const Matrix_CAD& matrix ) override;
 };
 
 /**
@@ -147,7 +147,7 @@ public:
     void   setXAxisAng( double value );
 
     virtual void print() const override;
-    virtual void transform( const Matrix& matrix ) override;
+    virtual void transform( const Matrix_CAD& matrix ) override;
 protected:
     CADVector position;
     CADVector extrusion;
@@ -170,7 +170,7 @@ public:
     void       setEnd( const CADPoint3D& value );
 
     virtual void print() const override;
-    virtual void transform( const Matrix& matrix ) override;
+    virtual void transform( const Matrix_CAD& matrix ) override;
 protected:
     CADPoint3D start;
     CADPoint3D end;
@@ -214,7 +214,7 @@ public:
 	void           setBulges(const vector<double>& value);
 
 	virtual void print() const override;
-	virtual void transform( const Matrix& matrix ) override;
+	virtual void transform( const Matrix_CAD& matrix ) override;
 
 protected:
 	bool						  bClosed;
@@ -249,7 +249,7 @@ public:
 	void setSplined( bool state );
 
     virtual void print() const override;
-    virtual void transform( const Matrix& matrix ) override;
+    virtual void transform( const Matrix_CAD& matrix ) override;
 
 protected:
 	bool			  bClosed;
@@ -291,7 +291,7 @@ public:
     void           setBulges( const vector<double>& value );
 
     virtual void print() const override;
-	virtual void transform(const Matrix& matrix) override;
+	virtual void transform(const Matrix_CAD& matrix) override;
 
 protected:
 	bool						  bClosed;
@@ -423,7 +423,7 @@ public:
     void setDegree( long value );
 
     virtual void print() const override;
-    virtual void transform( const Matrix& matrix ) override;
+    virtual void transform( const Matrix_CAD& matrix ) override;
 protected:
     long   scenario;
     bool   rational;
@@ -451,7 +451,7 @@ public:
     vector<CADVector> getCorners();
 
     virtual void print() const override;
-    virtual void transform( const Matrix& matrix ) override;
+    virtual void transform( const Matrix_CAD& matrix ) override;
 protected:
     double            elevation;
     vector<CADVector> avertCorners;
@@ -522,7 +522,7 @@ public:
     void addClippingPoint( const CADVector& pt );
 
     virtual void print() const override;
-    virtual void transform( const Matrix& matrix ) override;
+    virtual void transform( const Matrix_CAD& matrix ) override;
 protected:
     CADVector     vertInsertionPoint;
     //CADVector vectUDirection;
@@ -595,7 +595,7 @@ public:
     void  setInvisFlags( short value );
 
     virtual void print() const override;
-    virtual void transform( const Matrix& matrix ) override;
+    virtual void transform( const Matrix_CAD& matrix ) override;
 protected:
     vector<CADVector> avertCorners;
     short             invisFlags;
@@ -612,7 +612,7 @@ public:
     void addVertex( const CADVector& vertex );
 
     virtual void print() const override;
-    virtual void transform( const Matrix& matrix ) override;
+    virtual void transform( const Matrix_CAD& matrix ) override;
 protected:
     vector<CADVector> vertexes;
 };
@@ -645,7 +645,7 @@ public:
     void addVertex( const CADVector& vertex );
 
     virtual void print() const override;
-    virtual void transform( const Matrix& matrix ) override;
+    virtual void transform( const Matrix_CAD& matrix ) override;
 protected:
     double            scale;
     //char dJust;
@@ -675,7 +675,7 @@ public:
     void setPositionLocked( bool );
 
     virtual void print() const override;
-    virtual void transform( const Matrix& matrix ) override;
+    virtual void transform( const Matrix_CAD& matrix ) override;
 protected:
     CADVector vertAlignmentPoint;
     double    dfElevation;

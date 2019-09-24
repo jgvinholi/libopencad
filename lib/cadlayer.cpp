@@ -188,7 +188,7 @@ void CADLayer::addHandle( long handle, CADObject::ObjectType type, long cadinser
                         if( entity != nullptr )
                         {
                             addHandle( dCurrentEntHandle, entity->getType(), handle );
-                            Matrix mat;
+                            Matrix_CAD mat;
                             mat.translate( pInsert->vertInsertionPoint );
                             mat.scale( pInsert->vertScales );
                             mat.rotate( pInsert->dfRotation );
@@ -203,7 +203,7 @@ void CADLayer::addHandle( long handle, CADObject::ObjectType type, long cadinser
                     if( entity != nullptr )
                     {
                         addHandle( dCurrentEntHandle, entity->getType(), handle );
-                        Matrix mat;
+                        Matrix_CAD mat;
                         mat.translate( pInsert->vertInsertionPoint );
                         mat.scale( pInsert->vertScales );
                         mat.rotate( pInsert->dfRotation );
