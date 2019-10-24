@@ -469,12 +469,12 @@ int CADHeader::addValue( short code, double x, double y, double z )
 
 int CADHeader::addValue( short code, long julianday, long milliseconds )
 {
-    // unix -> julian        return ( unixSecs / 86400.0 ) + 2440587.5;
-    // julian -> unix        return (julian - 2440587.5) * 86400.0
+    // unix -> julian        return ( unix_varSecs / 86400.0 ) + 2440587.5;
+    // julian -> unix_var        return (julian - 2440587.5) * 86400.0
 
     double seconds     = double( milliseconds ) / 1000;
-    double cad_unix        = ( double( julianday ) - 2440587.5 ) * 86400.0;
-    time_t fullSeconds = static_cast<time_t>(cad_unix + seconds);
+    double unix_var        = ( double( julianday ) - 2440587.5 ) * 86400.0;
+    time_t fullSeconds = static_cast<time_t>(unix_var + seconds);
     return addValue( code, CADVariant( fullSeconds ) );
 }
 
